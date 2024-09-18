@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e8c3c14ff33b199b4a0838993eb8423",
+    "content-hash": "3af02b1036f5c420e268baa414cf1d78",
     "packages": [
         {
             "name": "brick/math",
@@ -5861,16 +5861,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.32.0",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b"
+                "reference": "ff9032dfb6f6182bc400c46cac33ed5de7beff0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/4a7e41d280861ca7e35710cea011a07669b4003b",
-                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/ff9032dfb6f6182bc400c46cac33ed5de7beff0c",
+                "reference": "ff9032dfb6f6182bc400c46cac33ed5de7beff0c",
                 "shasum": ""
             },
             "require": {
@@ -5885,6 +5885,7 @@
                 "orchestra/testbench": "^7.0|^8.0|^9.0",
                 "phpstan/phpstan": "^1.10"
             },
+            "default-branch": true,
             "bin": [
                 "bin/sail"
             ],
@@ -5920,7 +5921,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-09-11T20:14:29+00:00"
+            "time": "2024-09-17T14:30:46+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -7750,7 +7751,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "laravel/sail": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
