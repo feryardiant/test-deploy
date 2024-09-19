@@ -1,7 +1,7 @@
 {
-  "name": "laravel/laravel",
+  "name": "feryardiant/test-deploy",
   "type": "project",
-  "description": "The skeleton application for the Laravel framework.",
+  "description": "Dummy Laravel app to learn how to deploy.",
   "keywords": [
     "laravel",
     "framework"
