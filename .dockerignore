@@ -1,0 +1,15 @@
+# Ignored directories
+.devcontainer/
+.github/
+.vscode/
+node_modules/
+vendor/
+
+# Ignored files
+.dockerignore
+.editorconfig
+.gitattributes
+.gitignore
+#.env
+.env.*
+docker-compose.yml
