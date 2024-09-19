@@ -1,19 +1,53 @@
 {
-  "private": true,
+  "name": "test-deploy",
   "type": "module",
-  "packageManager": "pnpm@9.10.0",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "npm@10.8.0",
+  "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
+  "repository": "github:feryardiant/test-deploy",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "postinstall": "simple-git-hooks"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.1",
+    "axios": "^1.7.7"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^3.6.2",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@tailwindcss/forms": "^0.5.2",
+    "@types/node": "^20.16.5",
     "alpinejs": "^3.4.2",
     "autoprefixer": "^10.4.2",
-    "axios": "^1.7.4",
-    "laravel-vite-plugin": "^1.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "laravel-vite-plugin": "^1.0.5",
+    "lint-staged": "^15.2.10",
     "postcss": "^8.4.31",
+    "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.1.0",
-    "vite": "^5.0"
+    "typescript": "^5.6.2",
+    "vite": "^5.4.6"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx commitlint --edit $1",
+    "pre-commit": "npx lint-staged --allow-empty"
+  },
+  "lint-staged": {
+    "{app,config,database,resources,routes,tests}/**/*.php": [
+      "php vendor/bin/pint"
+    ],
+    "**/*.{js,json,ts,tsx,vue}": [
+      "npx eslint --fix"
+    ]
   }
 }

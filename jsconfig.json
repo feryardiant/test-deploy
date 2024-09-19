@@ -1,0 +1,29 @@
+{
+  "include": ["resources/client/**/*", "resources/js/**/*"],
+  "exclude": ["public/build", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "public",
+    "module": "esnext",
+    "target": "esnext",
+    "jsx": "preserve",
+    "strict": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "DOM"],
+    "typeRoots": ["resources/client"],
+    "types": ["vite/client"],
+    "paths": {
+      "~/*": ["resources/client/*"],
+      "@/*": ["resources/js/*"]
+    }
+  }
+}
