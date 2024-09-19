@@ -1,3 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --font-family-sans: "Inter Variable", sans-serif;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-gray-50 dark:bg-gray-800 text-slate-600 dark:text-slate-400;
+}
+
+* {
+  @apply transition-all;
+}
+
+[hidden], [x-cloak] {
+  display: none !important;
+}

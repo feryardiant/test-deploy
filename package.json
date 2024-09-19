@@ -19,13 +19,14 @@
     "@antfu/eslint-config": "^3.6.2",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@fontsource-variable/inter": "^5.1.0",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/vite": "^4.0.0-alpha.24",
+    "@tailwindcss/postcss": "^4.0.0-alpha.24",
+    "@types/alpinejs": "^3.13.10",
     "@types/node": "^20.16.5",
     "alpinejs": "^3.4.2",
     "autoprefixer": "^10.4.2",
     "eslint": "^9.10.0",
-    "globals": "^15.9.0",
     "laravel-vite-plugin": "^1.0.5",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.31",
@@ -38,6 +39,11 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "postcss": {
+    "plugins": {
+      "@tailwindcss/postcss": {}
+    }
   },
   "simple-git-hooks": {
     "commit-msg": "npx commitlint --edit $1",
