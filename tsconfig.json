@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "~/*": ["resources/client/*"],
+      "@/*": ["resources/js/*"]
+    },
+    "resolveJsonModule": true,
+    "typeRoots": ["resources/client"],
+    "types": ["vite/client"],
+    "allowJs": true,
+    "strict": true,
+    "declaration": true,
+    "noEmit": true,
+    "outDir": "public",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["resources/client/**/*", "resources/js/**/*"],
+  "exclude": ["public/build", "node_modules"]
+}

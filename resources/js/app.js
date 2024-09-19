@@ -1,7 +1,9 @@
 import Alpine from 'alpinejs'
-
-import './bootstrap'
+import axios from 'axios'
 
 window.Alpine = Alpine
+window.axios = axios
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 Alpine.start()
