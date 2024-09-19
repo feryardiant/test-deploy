@@ -1,9 +1,9 @@
 import Alpine from 'alpinejs'
-import axios from 'axios'
+
+Object.values(import.meta.glob('./modules/*.js', { eager: true })).forEach((i) => {
+  Promise.resolve(i.install())
+})
 
 window.Alpine = Alpine
-window.axios = axios
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 Alpine.start()
