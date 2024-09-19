@@ -12,6 +12,7 @@
     "postinstall": "simple-git-hooks"
   },
   "dependencies": {
+    "@sentry/browser": "^8.30.0",
     "alpinejs": "^3.14.1",
     "axios": "^1.7.7"
   },

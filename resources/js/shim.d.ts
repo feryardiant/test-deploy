@@ -4,11 +4,11 @@ import type { AxiosStatic } from 'axios'
 export {}
 
 declare global {
-  const alpine: Alpine
+  const Alpine: Alpine
   const axios: AxiosStatic
 
   interface Window {
-    alpine: Alpine
+    Alpine: Alpine
     axios: AxiosStatic
   }
 }
