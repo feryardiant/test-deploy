@@ -24,14 +24,22 @@ jobs:
       target-branch: ${{ steps.environments.outputs.target-branch }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         # env:
         #   GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          php-version: ${{ matrix.php }}
-          extensions: none, curl, intl, libxml, mbstring, pcntl, ssh2, zip
+          php-version: 8.2
+          extensions: curl, dom, intl, libxml, mbstring, pcntl, ssh2, xml, zip
           tools: composer:v2
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
 
       - name: Environment
         id: environments
@@ -41,6 +49,36 @@ jobs:
           echo "target-branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
           echo "composer-cache=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
           echo "should-reports=$([[ -n \"$CC_TEST_REPORTER_ID\" ]] && echo '1')" >> $GITHUB_OUTPUT
+
+      - name: Prepare Composer Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.environments.outputs.composer-cache }}
+          key: php-8.2-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-8.2-composer-
+
+      - name: Install dependencies
+        run: |
+          composer update --prefer-dist --no-interaction --no-progress --ansi
+          npm ci
+
+      - name: Build frontend
+        env:
+          APP_NAME: ${{ vars.APP_NAME }}
+          # SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          # SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          # SENTRY_ORG: ${{ github.repository_owner }}
+          # SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: |
+          npm run build
+
+      - name: Store assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets-build
+          path: |
+            public/build
+            public/.gitignore
 
   units:
     name: Units on PHP ${{ matrix.php }}
@@ -77,8 +115,15 @@ jobs:
         #   GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           php-version: ${{ matrix.php }}
-          extensions: bcmath, curl, exif, gd, intl, iconv, imagick, mbstring, pcntl, pdo, pdo_pgsql, pdo, zip
+          extensions: bcmath, curl, dom, exif, gd, intl, iconv, imagick, libxml, mbstring, pcntl, pdo, pdo_pgsql, pdo, xml, zip
           coverage: xdebug
+
+      - name: Download assets
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: assets-build
+          path: public
 
       - name: Prepare Composer Cache
         uses: actions/cache@v4
