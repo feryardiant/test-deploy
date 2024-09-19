@@ -7,7 +7,6 @@ on:
     branches: [main]
 
 env:
-  APP_DEBUG: true
   DB_CONNECTION: pgsql
   DB_DATABASE: ${{ github.repository_owner }}
   DB_USERNAME: ${{ github.repository_owner }}
@@ -18,7 +17,6 @@ jobs:
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      app-key: ${{ steps.environments.outputs.app-key }}
       composer-cache: ${{ steps.environments.outputs.composer-cache }}
       should-reports: ${{ steps.environments.outputs.should-reports }}
       target-branch: ${{ steps.environments.outputs.target-branch }}
@@ -64,6 +62,7 @@ jobs:
 
       - name: Build frontend
         env:
+          APP_DEBUG: true
           APP_NAME: ${{ vars.APP_NAME }}
           # SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           # SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
@@ -84,6 +83,9 @@ jobs:
     name: Units on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     needs: prepare
+
+    env:
+      COLUMNS: 120
 
     services:
       pgsql:
@@ -133,12 +135,10 @@ jobs:
           restore-keys: php-${{ matrix.php }}-composer-
 
       - name: Install dependencies
-        id: installs
         run: |
           composer update --prefer-dist --no-interaction --no-progress --ansi
-          echo "app-key=$(php artisan key:generate --show --no-ansi)" >> $GITHUB_OUTPUT
+          cp .github/.env.example .env
+          php artisan key:generate
 
       - name: Run tests
-        env:
-          APP_KEY: ${{ steps.installs.outputs.app-key }}
         run: php artisan test --ansi --coverage
