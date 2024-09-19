@@ -1,16 +1,17 @@
-"use strict";
+'use strict'
 
-import globals from "globals";
+import antfu from '@antfu/eslint-config'
 
-export default [
+export default antfu(
+  {
+    ignores: ['tests/reports/**'],
+  },
   {
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "module",
-      globals: {
-        ...globals.browser,
-        ...globals.node,
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   },
-];
+)

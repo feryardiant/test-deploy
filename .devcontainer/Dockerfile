@@ -37,8 +37,7 @@ RUN apt-get update \
     && curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get install -y postgresql-client-$POSTGRES_VERSION \
     && apt-get install -y nodejs \
-    && npm install -g bun yarn pnpm@9.5.0 \
-    && pnpm config -g set store-dir /var/tmp/pnpm-store \
+    && npm install -g npm bun yarn pnpm \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

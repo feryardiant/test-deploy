@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "npm@10.8.0",
   "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
   "repository": "github:feryardiant/test-deploy",
   "scripts": {
@@ -16,6 +16,7 @@
     "axios": "^1.7.7"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^3.6.2",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@tailwindcss/forms": "^0.5.9",
@@ -36,15 +37,15 @@
     ]
   },
   "simple-git-hooks": {
-    "commit-msg": "pnpm exec commitlint --edit $1",
-    "pre-commit": "pnpm exec lint-staged --allow-empty"
+    "commit-msg": "npx commitlint --edit $1",
+    "pre-commit": "npx lint-staged --allow-empty"
   },
   "lint-staged": {
     "{app,config,database,resources,routes,tests}/**/*.php": [
       "php vendor/bin/pint"
     ],
     "**/*.{js,json,ts,tsx,vue}": [
-      "eslint --fix"
+      "npx eslint --fix"
     ]
   }
 }
