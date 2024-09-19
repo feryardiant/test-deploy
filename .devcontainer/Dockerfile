@@ -35,12 +35,10 @@ RUN apt-get update \
     && pecl install swoole-5.1.2 \
     && echo "extension=swoole.so" > /etc/php/8.3/cli/conf.d/20-swoole.ini \
     && curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
-    && apt-get install -y nodejs \
-    && npm install -g bun \
-    && corepack install -g yarn \
-    && corepack install -g pnpm \
-    && corepack enable pnpm \
     && apt-get install -y postgresql-client-$POSTGRES_VERSION \
+    && apt-get install -y nodejs \
+    && npm install -g bun yarn pnpm \
+    && pnpm config -g set store-dir /var/tmp/pnpm-store \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
