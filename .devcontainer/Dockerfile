@@ -10,8 +10,9 @@ WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=UTC
-ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan serve --host=0.0.0.0 --port=80"
 ENV SUPERVISOR_PHP_USER="sail"
+ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan serve --host=0.0.0.0 --port=80"
+ENV SUPERVISOR_QUEUE_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan queue:work --timeout=360 --max-time=1200 --tries=3"
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -35,10 +36,10 @@ RUN apt-get update \
     && echo "extension=swoole.so" > /etc/php/8.3/cli/conf.d/20-swoole.ini \
     && curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get install -y nodejs \
-    && corepack install -g npm \
-    && corepack install -g pnpm \
-    && corepack install -g yarn \
     && npm install -g bun \
+    && corepack install -g yarn \
+    && corepack install -g pnpm \
+    && corepack enable pnpm \
     && apt-get install -y postgresql-client-$POSTGRES_VERSION \
     && apt-get -y autoremove \
     && apt-get clean \
