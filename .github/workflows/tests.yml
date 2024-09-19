@@ -140,5 +140,6 @@ jobs:
 
       - name: Run tests
         env:
+          COLUMNS: 120
           APP_KEY: ${{ steps.installs.outputs.app-key }}
         run: php artisan test --ansi --coverage
