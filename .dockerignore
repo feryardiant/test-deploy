@@ -1,11 +1,17 @@
 # Ignored directories
-.devcontainer/
-.github/
-.vscode/
-node_modules/
-vendor/
+.devcontainer
+.github
+.git
+.vscode
+node_modules
+public/build
+vendor
 
 # Ignored files
+Thumbs.db
+Desktop.ini
+.directory
+.DS_Store
 .dockerignore
 .editorconfig
 .gitattributes
@@ -13,3 +19,4 @@ vendor/
 #.env
 .env.*
 docker-compose.yml
+public/hot
