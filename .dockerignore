@@ -1,15 +1,34 @@
-# Ignored directories
-.devcontainer/
-.github/
-.vscode/
-node_modules/
-vendor/
+# excludes from the docker image/build
 
-# Ignored files
-.dockerignore
+# 1. Ignore Laravel-specific files we don't need
+bootstrap/cache/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+*.env*
+
+# 2. Ignore dependencies directory
+**/*node_modules
+.rr.yml
+frankenphp
+rr
+vendor
+
+# 3. Ignore common files/directories we don't need
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+.devcontainer
 .editorconfig
 .gitattributes
+.github
 .gitignore
-#.env
-.env.*
+.git
+.idea
+.vscode
+.zed
 docker-compose.yml
+fly.toml
+public/hot
